@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Sans:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,62 +6,66 @@
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 215 25% 15%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
-
-    --primary: 173 58% 39%;
+    /* 🌊 FLOW-RH COULEURS LOGO */
+    --primary: 175 100% 44%;        /* #00C2B2 Turquoise */
     --primary-foreground: 0 0% 100%;
-
-    --secondary: 210 18% 93%;
-    --secondary-foreground: 215 25% 25%;
-
-    --muted: 210 14% 95%;
-    --muted-foreground: 215 12% 50%;
-
-    --accent: 173 40% 92%;
-    --accent-foreground: 173 58% 25%;
-
-    --destructive: 0 72% 51%;
+    --secondary: 279 65% 38%;       /* #8E24AA Violet */
+    --secondary-foreground: 0 0% 100%;
+    
+    /* 🖤 DARK MODE PREMIUM */
+    --background: 0 0% 7%;          /* #121212 */
+    --foreground: 0 0% 93%;         /* #EDEDED */
+    --card: 0 0% 10%;               /* #1A1A1A */
+    --card-foreground: 0 0% 93%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 93%;
+    --muted: 0 0% 15%;              /* #2A2A2A */
+    --muted-foreground: 0 0% 65%;   /* #A0A0A0 */
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 93%;
+    
+    /* ⚠️ STATUTS */
+    --destructive: 332 80% 52%;     /* #FF4081 */
     --destructive-foreground: 0 0% 100%;
-
-    --success: 152 60% 40%;
+    --success: 175 100% 44%;
     --success-foreground: 0 0% 100%;
-
-    --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 100%;
-
-    --info: 210 90% 52%;
+    --warning: 55 100% 60%;         /* #FFD600 */
+    --warning-foreground: 0 0% 20%;
+    --info: 279 65% 38%;
     --info-foreground: 0 0% 100%;
-
-    --border: 214 20% 90%;
-    --input: 214 20% 90%;
-    --ring: 173 58% 39%;
-
-    --radius: 0.75rem;
-
-    --sidebar-background: 215 25% 15%;
-    --sidebar-foreground: 210 20% 85%;
-    --sidebar-primary: 173 58% 50%;
+    
+    /* 🖼️ BORDURES */
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 175 100% 44%;
+    
+    /* 📐 RAYONS */
+    --radius: 8px;
+    
+    /* 🧭 SIDEBAR */
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 0 0% 85%;
+    --sidebar-primary: 175 100% 44%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 20% 20%;
-    --sidebar-accent-foreground: 210 20% 90%;
-    --sidebar-border: 215 20% 22%;
-    --sidebar-ring: 173 58% 50%;
-    --sidebar-muted: 215 15% 40%;
-
-    --font-heading: 'Instrument Sans', sans-serif;
-    --font-body: 'DM Sans', sans-serif;
-
-    --gradient-primary: linear-gradient(135deg, hsl(173, 58%, 39%), hsl(195, 60%, 42%));
-    --gradient-sidebar: linear-gradient(180deg, hsl(215, 28%, 12%), hsl(215, 25%, 18%));
-    --shadow-card: 0 1px 3px 0 hsl(215 25% 15% / 0.04), 0 1px 2px -1px hsl(215 25% 15% / 0.04);
-    --shadow-card-hover: 0 10px 30px -10px hsl(173 58% 39% / 0.12);
+    --sidebar-accent: 0 0% 20%;
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 175 100% 44%;
+    --sidebar-muted: 0 0% 40%;
+    
+    /* 🔤 TYPO */
+    --font-heading: 'Inter', 'Instrument Sans', sans-serif;
+    --font-body: 'DM Sans', 'Inter', sans-serif;
+    
+    /* 🌈 GRADIENTS */
+    --gradient-primary: linear-gradient(135deg, #00C2B2 0%, #00A89E 50%, #009688 100%);
+    --gradient-sidebar: linear-gradient(135deg, #00C2B2 0%, #8E24AA 50%, #121212 100%);
+    --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    
+    /* 🖼️ SHADOWS 3D */
+    --shadow-card: 0 8px 32px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.2);
+    --shadow-card-hover: 0 16px 48px rgba(0,0,0,0.4), 0 4px 16px rgba(0,194,178,0.2);
+    --shadow-button: 0 4px 16px rgba(0,194,178,0.3);
   }
 
   * {
@@ -69,11 +73,104 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: '"cv11" 1, "ss01" 1';
     font-family: var(--font-body);
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
+    @apply font-heading font-semibold tracking-wide;
+  }
+}
+
+/* 🎨 UTILITAIRES FLOW-RH PREMIUM (CHOIX 1) */
+@layer components {
+  /* 🔘 BOUTONS PREMIUM */
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary 
+           text-primary-foreground shadow-lg hover:shadow-[0_8px_32px_rgba(0,194,178,0.4)] 
+           transform hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 
+           rounded-lg px-6 py-2.5 font-semibold border-0 font-heading tracking-wide;
+  }
+  
+  .btn-secondary {
+    @apply bg-gradient-to-r from-secondary to-secondary/80 hover:from-secondary/90 hover:to-secondary 
+           text-secondary-foreground shadow-lg hover:shadow-[0_8px_32px_rgba(142,36,170,0.4)] 
+           transform hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 
+           rounded-lg px-6 py-2.5 font-semibold border-0 font-heading tracking-wide;
+  }
+  
+  .btn-destructive {
+    @apply bg-gradient-to-r from-destructive to-destructive/80 hover:from-destructive/90 hover:to-destructive 
+           text-destructive-foreground shadow-lg hover:shadow-[0_8px_32px_rgba(255,64,129,0.4)] 
+           transform hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 
+           rounded-lg px-6 py-2.5 font-semibold border-0 font-heading tracking-wide;
+  }
+  
+  /* 🃏 CARTES SaaS */
+  .card {
+    @apply bg-gradient-to-br from-card to-muted/30 backdrop-blur-sm border border-border/50 
+           rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)] 
+           transition-all duration-500 hover:scale-[1.02] border-0;
+  }
+  
+  .card-stat {
+    @apply card p-8 text-center hover:bg-gradient-to-br hover:from-primary/5 hover:to-secondary/5;
+  }
+  
+  /* 🧭 SIDEBAR ITEMS */
+  .sidebar-item {
+    @apply flex items-center gap-3 p-4 rounded-xl hover:bg-sidebar-accent/50 hover:text-sidebar-primary-foreground 
+           hover:shadow-md hover:border-white/20 hover:backdrop-blur-sm hover:scale-[1.01] 
+           transition-all duration-300 border-l-4 border-transparent hover:border-primary/50 
+           font-semibold tracking-wide;
+  }
+  
+  .sidebar-item-active {
+    @apply bg-gradient-to-r from-primary/20 to-secondary/20 text-primary shadow-lg shadow-primary/20 
+           border-primary/40 backdrop-blur-sm scale-[1.02];
+  }
+  
+  /* ✨ LOGO ANIMÉ */
+  .logo-glow {
+    animation: glow 3s ease-in-out infinite;
+  }
+  
+  /* 📊 STATS PULSE */
+  .stat-pulse {
+    animation: pulse-stat 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  /* 🖱️ HOVER FLOAT */
+  .float-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .float-hover:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
+}
+
+/* 🌟 ANIMATIONS CSS */
+@keyframes glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(0,194,178,0.4); 
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(0,194,178,0.8), 0 0 60px rgba(142,36,170,0.4); 
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pulse-stat {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 0.85; 
+    transform: scale(1.02); 
   }
 }

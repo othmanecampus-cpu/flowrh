@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle, XCircle, Users, CalendarDays, UserCheck } from "lucide-react";
+import { CheckCircle, XCircle, Users, CalendarDays } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { statusColors } from "@/types/requests";
@@ -15,7 +15,7 @@ const roleLabels: Record<string, string> = {
 
 const Admin = () => {
   const queryClient = useQueryClient();
-  const [tab, setTab] = useState<"demandes" | "utilisateurs" | "soldes" | "comptes">("demandes");
+  const [tab, setTab] = useState<"demandes" | "utilisateurs" | "soldes">("demandes");
 
   const { data: pendingConges = [] } = useQuery({
     queryKey: ["admin_conges"],
@@ -47,7 +47,7 @@ const Admin = () => {
     },
   });
 
-  const pendingAccounts = allProfiles.filter((p: any) => !p.approved);
+  
 
   const allPending = [
     ...pendingConges.map((c: any) => ({ id: c.id, table: "conges" as const, userName: c.profiles?.full_name || "—", type: "Congé", details: `${c.date_debut} → ${c.date_fin}`, date: c.created_at })),
@@ -69,17 +69,6 @@ const Admin = () => {
     onError: (err: Error) => toast.error(err.message),
   });
 
-  const approveMutation = useMutation({
-    mutationFn: async ({ profileId, approved }: { profileId: string; approved: boolean }) => {
-      const { error } = await supabase.from("profiles").update({ approved }).eq("id", profileId);
-      if (error) throw error;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["admin_profiles"] });
-      toast.success("Compte mis à jour !");
-    },
-    onError: (err: Error) => toast.error(err.message),
-  });
 
   const roleChangeMutation = useMutation({
     mutationFn: async ({ userId, role }: { userId: string; role: string }) => {
@@ -95,7 +84,6 @@ const Admin = () => {
 
   const tabs = [
     { key: "demandes" as const, label: "Demandes", icon: CheckCircle, count: allPending.length },
-    { key: "comptes" as const, label: "Comptes en attente", icon: UserCheck, count: pendingAccounts.length },
     { key: "utilisateurs" as const, label: "Utilisateurs", icon: Users },
     { key: "soldes" as const, label: "Soldes", icon: CalendarDays },
   ];
@@ -157,42 +145,6 @@ const Admin = () => {
                 ))}
                 {allPending.length === 0 && (
                   <tr><td colSpan={4} className="px-5 py-8 text-center text-muted-foreground">Aucune demande en attente</td></tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </motion.div>
-      )}
-
-      {tab === "comptes" && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-          className="bg-card rounded-xl shadow-card border border-border/50">
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-border text-left">
-                  <th className="px-5 py-3 font-medium text-muted-foreground">Nom</th>
-                  <th className="px-5 py-3 font-medium text-muted-foreground">Email</th>
-                  <th className="px-5 py-3 font-medium text-muted-foreground">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {pendingAccounts.map((p: any) => (
-                  <tr key={p.id} className="border-b border-border/50">
-                    <td className="px-5 py-3 font-medium text-card-foreground">{p.full_name}</td>
-                    <td className="px-5 py-3 text-muted-foreground">{p.email}</td>
-                    <td className="px-5 py-3">
-                      <div className="flex gap-2">
-                        <button onClick={() => approveMutation.mutate({ profileId: p.id, approved: true })}
-                          className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-success/10 text-success text-xs font-semibold hover:bg-success/20 transition-colors">
-                          <CheckCircle className="w-3.5 h-3.5" /> Approuver
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-                {pendingAccounts.length === 0 && (
-                  <tr><td colSpan={3} className="px-5 py-8 text-center text-muted-foreground">Aucun compte en attente de validation</td></tr>
                 )}
               </tbody>
             </table>

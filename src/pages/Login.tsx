@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GraduationCap, Mail, Lock, ArrowRight, User } from "lucide-react";
+import { Mail, Lock, ArrowRight, User } from "lucide-react";
 import { motion } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
@@ -32,7 +32,7 @@ const Login = () => {
       if (error) {
         toast.error(error);
       } else {
-        toast.success("Compte créé ! Un administrateur doit valider votre compte avant que vous puissiez accéder à l'application.");
+        toast.success("Compte créé ! Un administrateur doit valider votre compte.");
       }
     } else {
       const error = await login(email, password);
@@ -46,91 +46,104 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex">
-      <div className="hidden lg:flex lg:w-1/2 flex-col justify-between p-12"
-        style={{ background: "var(--gradient-sidebar)" }}>
-        <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-sidebar-primary/20">
-            <GraduationCap className="w-6 h-6 text-sidebar-primary" />
-          </div>
-          <span className="font-heading font-bold text-xl text-sidebar-primary-foreground">FLOWRH</span>
+    <div className="min-h-screen flex bg-[#0A0A0A]">
+      {/* SECTION GAUCHE : NOIR PREMIUM AVEC LOGO */}
+      <div className="hidden lg:flex lg:w-1/2 flex-col justify-between p-12 relative overflow-hidden border-r border-white/5"
+        style={{ backgroundColor: "#121212" }}>
+        
+        {/* Décoration subtile en arrière-plan */}
+        <div className="absolute top-[-10%] right-[-10%] w-64 h-64 bg-[#00C2B2]/10 rounded-full blur-3xl"></div>
+        
+        <div className="flex items-center gap-4 relative z-10">
+          <img src="/Flow RH.png" alt="Flow RH Logo" className="w-12 h-auto" />
+          <span className="font-heading font-bold text-2xl text-white tracking-tight">FLOWRH</span>
         </div>
-        <div className="space-y-6">
-          <motion.h2 initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}
-            className="font-heading text-4xl font-bold text-sidebar-primary-foreground leading-tight">
-            Gérez vos ressources <br />humaines en toute <br />
-            <span className="text-sidebar-primary">simplicité.</span>
+
+        <div className="space-y-6 relative z-10">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ delay: 0.2 }}
+            className="font-heading text-5xl font-bold text-white leading-tight">
+            Gérez vos RH <br />
+            <span className="text-[#00C2B2]">en toute fluidité.</span>
           </motion.h2>
-          <p className="text-sidebar-foreground max-w-sm text-sm leading-relaxed">
-            Congés, remboursements, heures supplémentaires — tout au même endroit pour l'École des Langues et Cultures.
+          <p className="text-gray-400 max-w-sm text-lg leading-relaxed">
+            L'outil centralisé pour les congés, remboursements et la gestion des talents de l'ELC de Paris.
           </p>
         </div>
-        <p className="text-sidebar-muted text-xs">© 2026 FLOWRH — École des Langues et Cultures</p>
+
+        <p className="text-gray-600 text-xs relative z-10">
+          © 2026 FLOWRH — École des Langues et Cultures
+        </p>
       </div>
 
-      <div className="flex-1 flex items-center justify-center p-8 bg-background">
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-sm space-y-6">
-          <div className="lg:hidden flex items-center gap-3 mb-4">
-            <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-primary/10">
-              <GraduationCap className="w-5 h-5 text-primary" />
-            </div>
-            <span className="font-heading font-bold text-lg text-foreground">FLOWRH</span>
+      {/* SECTION DROITE : FORMULAIRE ÉPURÉ */}
+      <div className="flex-1 flex items-center justify-center p-8">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }} 
+          animate={{ opacity: 1, scale: 1 }} 
+          className="w-full max-w-sm space-y-8"
+        >
+          {/* Logo visible uniquement sur Mobile */}
+          <div className="lg:hidden flex flex-col items-center gap-4 mb-8">
+            <img src="/Flow RH.png" alt="Flow RH Logo" className="w-16 h-auto" />
+            <h1 className="font-heading font-bold text-2xl text-white">FLOWRH</h1>
           </div>
 
-          <div>
-            <h1 className="font-heading text-2xl font-bold text-foreground">
-              {isSignup ? "Créer un compte" : "Connexion"}
+          <div className="space-y-2">
+            <h1 className="font-heading text-3xl font-bold text-white">
+              {isSignup ? "Créer un compte" : "Bon retour !"}
             </h1>
-            <p className="text-sm text-muted-foreground mt-1">
-              {isSignup ? "Inscription réservée aux emails @elcdeparis.fr" : "Accédez à votre espace RH"}
+            <p className="text-sm text-gray-400">
+              {isSignup ? "Inscription @elcdeparis.fr" : "Entrez vos identifiants pour continuer"}
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-5">
             {isSignup && (
-              <div className="space-y-1.5">
-                <label className="text-sm font-medium text-foreground">Nom complet</label>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-300">Nom complet</label>
                 <div className="relative">
-                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                   <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)}
                     placeholder="Prénom Nom" required
-                    className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring/30 transition-shadow" />
+                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#00C2B2]/50 transition-all" />
                 </div>
               </div>
             )}
-            <div className="space-y-1.5">
-              <label className="text-sm font-medium text-foreground">Email</label>
+            
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-300">Email professionnel</label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
-                  placeholder={isSignup ? "prenom.nom@elcdeparis.fr" : "votre@email.com"} required
-                  className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring/30 transition-shadow" />
+                  placeholder="votre.nom@elcdeparis.fr" required
+                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#00C2B2]/50 transition-all" />
               </div>
-              {isSignup && (
-                <p className="text-xs text-muted-foreground">Uniquement les adresses @elcdeparis.fr</p>
-              )}
             </div>
-            <div className="space-y-1.5">
-              <label className="text-sm font-medium text-foreground">Mot de passe</label>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-300">Mot de passe</label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••" required minLength={6}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring/30 transition-shadow" />
+                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-white/10 bg-white/5 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#00C2B2]/50 transition-all" />
               </div>
             </div>
 
             <button type="submit" disabled={submitting}
-              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity disabled:opacity-50">
-              {submitting ? "Chargement..." : isSignup ? "Créer le compte" : "Se connecter"}
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#00C2B2] text-white font-bold text-sm hover:bg-[#00a89a] transition-all shadow-lg shadow-[#00C2B2]/20 disabled:opacity-50">
+              {submitting ? "Traitement..." : isSignup ? "Créer mon compte" : "Se connecter"}
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>
 
-          <p className="text-sm text-center text-muted-foreground">
-            {isSignup ? "Déjà un compte ?" : "Pas encore de compte ?"}{" "}
-            <button onClick={() => setIsSignup(!isSignup)} className="text-primary font-medium hover:underline">
-              {isSignup ? "Se connecter" : "Créer un compte"}
+          <p className="text-sm text-center text-gray-400">
+            {isSignup ? "Vous avez déjà un compte ?" : "Pas encore de membre ?"}{" "}
+            <button onClick={() => setIsSignup(!isSignup)} className="text-[#00C2B2] font-bold hover:text-white transition-colors">
+              {isSignup ? "Se connecter" : "S'inscrire"}
             </button>
           </p>
         </motion.div>
